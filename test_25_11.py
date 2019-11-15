@@ -15,7 +15,7 @@ import plotly.subplots as subplots
 import pandas as pd
 from dash.dependencies import Input, Output,State
 import plotly.graph_objs as go
-external_stylesheets = ['https://codepen.io/agarciag/pen/ZEEmeWr.css']
+external_stylesheets = ['https://codepen.io/agarciag/pen/ZEEmeWr.css','https://codepen.io/agarciag/pen/BaaGZzE.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 colors ={
@@ -31,7 +31,7 @@ app.layout=html.Div(style={'backgroundColor':colors['background']},children=[
         html.Div(style={'padding':20}),
         html.Div(id='Header',className='row', children=[
             html.Div(className='container', children=[
-                html.H1(children=dcc.Markdown('**Piccolo Kitchen**'), style={'color': colors['title'], 'textAlign':'center'}),
+                html.H1(children=dcc.Markdown('**Piccolo Kitchen**'), style={'color': colors['title'], 'textAlign':'center','fontSize':75}),
             ]),        
         ]),
         html.Div(style={'padding':5}),
@@ -41,7 +41,7 @@ app.layout=html.Div(style={'backgroundColor':colors['background']},children=[
         ]),
         html.Div(style={'padding':15}),
         html.Div(className='row',children=[
-          html.Div(id='left side', className='seven columns', children=[           
+          html.Div(id='left side', className='six columns', children=[           
                  html.H3(dcc.Markdown('**TerMITes Enviromental real time data**'),style={'textAlign':'left','fontSize':35,'backgroundColor':colors['right'],'padding':'10px 10px 10px 10px'}),
                       dcc.Graph(id='termite'),
                       dcc.Interval(
@@ -52,7 +52,7 @@ app.layout=html.Div(style={'backgroundColor':colors['background']},children=[
                       ],style={}),
                              
                    #Right Side
-           html.Div(id='right side', className='five columns',children=[
+           html.Div(id='right side', className='six columns',children=[
                 html.H3([
                        dcc.Markdown('**Kitchen Status**'),
                        html.H4(id='time',style={'fontSize':35,'paading':5,'textAlign':'center','fontWeight':'bold'}),
@@ -72,7 +72,7 @@ app.layout=html.Div(style={'backgroundColor':colors['background']},children=[
                         n_intervals=0
                         ),
                    html.Div(className='row',style={}, children=[
-                           html.Div(className='one-third column',style={'backgroundColor': colors['kitchen_top']}, children=[
+                           html.Div(className='main_pretty_container one-third column',style={}, children=[
                                     html.H3(dcc.Markdown('**Kitchen Top**'),style={'padding':10}),
                                     html.H4(dcc.Markdown('Temperature *(ºC)*'),
                                            style={'padding':'0px 0px 0px 0px'}),
@@ -100,7 +100,7 @@ app.layout=html.Div(style={'backgroundColor':colors['background']},children=[
                                       style={'padding':'20px 0px 50px 60px'}
                                     ) ,   
                            ]),
-                           html.Div(className='one-third column',style={'backgroundColor':colors['right']}, children=[
+                           html.Div(className='pretty_container one-third column',style={}, children=[
                                     html.H3(dcc.Markdown('**Front Cabinet**'),style={'padding':'10px 5px 5px 0px'}),
                                     html.H4('Temperature'),
                                     daq.LEDDisplay(
@@ -148,7 +148,7 @@ app.layout=html.Div(style={'backgroundColor':colors['background']},children=[
                                             html.Div(id='number-front',children=-1,style={'fontSize':30,
                                                                                           'padding':'10px 0px 0px 20px'})]),
                                     ]),
-                           html.Div(className='one-third column',style={'backgroundColor':colors['right']}, children=[
+                           html.Div(className='pretty_container one-third column', children=[ #style={'backgroundColor':colors['right']},
                                     html.H3(dcc.Markdown('**Back Cabinet**'),style={'padding':'10px 0px 5px 0px'}),
                                     html.H4('Temperature'),
                                     daq.LEDDisplay(
