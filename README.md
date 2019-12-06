@@ -16,5 +16,5 @@ Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejan
 
 Current status: [Under Develoment]
 
-![] (https://github.com/agarciagoni/Kitchen-visual/blob/master/Status/current-status.gif?raw=true)
+![] (Status/current-status.gif)
 
