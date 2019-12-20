@@ -3,19 +3,16 @@
 Created on Fri Nov 22 17:35:50 2019
 
 @author: Alejandro Garcia
-Script to create the dashboard about actual status of the kitchen user
+
+Script to create the dashboard about actual status of the kitchen user. Here it is 
+designed the page structure, all callback functions are defined in the main script.
+
+
 """
 
-import dash
-import dash_table
-from statistics import mean
+
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.subplots as subplots
-import pandas as pd
-import plotly.graph_objs as go
-
-#data=pd.read_csv('PositionFile')
 
 
 Current_layout=html.Div([
@@ -39,16 +36,16 @@ Current_layout=html.Div([
                                     ]),
                                     html.Br(),
                                     html.Div(className='row', children=[
-                                        html.Div(className='',children=[
-                                                html.H5(className='six columns',children=[
+                                        html.Div(className='small-title',children=[
+                                                html.H5(className='six columns small-title',children=[
                                                         'Front Cabinet']),
-                                                html.H5(className='six columns ',children=
+                                                html.H5(className='six columns small-title',children=
                                                          "Up")       
                                             ]),
                                         html.Div(className='',children=[
-                                                html.H5(className='six columns',children=[
+                                                html.H5(className='six columns small-title',children=[
                                                         'Back Cabinet']),
-                                                html.H5(className='six columns',children=
+                                                html.H5(className='six columns small-title',children=
                                                          "High")       
                                            ])
                                     ])
@@ -66,18 +63,4 @@ Current_layout=html.Div([
     
                                 ]),
                         ]),
-                        html.Div(className='row', children=[
-                        html.Div(className='six columns row pretty-container',children=[
-                                html.H5(className='six columns',children=[
-                                        'Front Cabinet']),
-                                html.H5(className='six columns ',children=
-                                         "Up")       
-                            ]),
-                        html.Div(className='six columns row pretty-container',children=[
-                                html.H5(className='six columns',children=[
-                                        'Back Cabinet']),
-                                html.H5(className='six columns',children=
-                                         "High")       
-                            ])
-                        ]),
-                        ])
+])

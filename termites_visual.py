@@ -2,25 +2,31 @@
 """
 Created on Fri Nov 22 17:29:10 2019
 
-@author: Alejandro
+Script to create the dashboard about enviromental data of the kitchen using terMITes. Here it is 
+designed the page structure, all callback functions are defined in the main script.
+
+@author: Alejandro Garcia
 """
-import dash
-from statistics import mean
+
 import dash_core_components as dcc
 import dash_html_components as html
-import plotly.subplots as subplots
+
 import pandas as pd
 import plotly.graph_objs as go
 
+# --------------------------------------------------------------------------------------
+""" Subplots definition """
+
+liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/codes/terMITes/csv_serial.csv')
 colors ={
-        'background':'white',
-        'text': 'black',
-        'title': 'black',
+        'background':'black',
+        'text': 'white',
+        'title': 'white',
         'right': 'rgba(128, 128, 128, 0.2)',
         'kitchen_top': 'rgba(128, 128, 128, 0.5)',
         'led':'rgba(128, 128, 128, 0.1)'
         }
-liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/codes/terMITes/csv_serial.csv') 
+ 
 temp={'data':[go.Scatter(                         
               y= liv_ter.iloc[-1000:,4].tolist(),
               line={'color':'red'},
@@ -30,7 +36,7 @@ temp={'data':[go.Scatter(
      'layout': {
              'title': 'Temperature',
              'plot_bgcolor':colors['background'],
-            # 'paper_bgcolor': colors['background'],
+             'paper_bgcolor': colors['background'],
              'font': {
                         'color': colors['text']},
              'height':300,
@@ -46,7 +52,7 @@ hum={'data':[go.Scatter(
      'layout': {
              'title': 'Humidity',
              'plot_bgcolor':colors['background'],
-            # 'paper_bgcolor': colors['background'],
+             'paper_bgcolor': colors['background'],
              'font': {
                         'color': colors['text']},
              'height':300,
@@ -61,14 +67,23 @@ lit={'data':[go.Scatter(
      'layout': {
              'title': 'Light',
              'plot_bgcolor':colors['background'],
-            # 'paper_bgcolor': colors['background'],
+             'paper_bgcolor': colors['background'],
              'font': {
                         'color': colors['text']},
              'height':300,
                 }
 } 
 
-terMITes_layout=html.Div(className='eight columns',children=[
+# --------------------------------------------------------------------------------------
+""" Layout """
+
+terMITes_layout=html.Div([
+        html.Div([
+                html.H5(className='development-title',
+                        children=['Page under development.']),
+                            
+                        ]),
+        html.Div(className='eight columns',children=[
 
         dcc.Graph(id='temp',className='graph-container', 
                   figure=temp             
@@ -78,5 +93,5 @@ terMITes_layout=html.Div(className='eight columns',children=[
                 ),
         dcc.Graph(id='lit',className='graph-container', 
                   figure=lit             
-                )        ]
-        ),
+                )        ]),
+        ]),

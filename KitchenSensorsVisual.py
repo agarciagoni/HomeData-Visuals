@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
 """
 Created on Fri Nov 15 14:47:20 2019
-This script  will be the visual tool for the first Piccolo Kitchen Sensors
+This script  will be the visual tool for the first Piccolo Kitchen Sensors.
 
 Using plotly Dash tool and an underdevelopment CSS for different components.
 On the next step we will include React components created for thi project.
+
+
 @author: Alejandro Garcia
+
 """
 
-import serial
-from datetime import datetime
+""" Import libraries,files and Serial, UDP connections"""
+
 import dash
-import dash_table
-from statistics import mean
 import dash_core_components as dcc
 import dash_html_components as html
-import dash_daq as daq
 import plotly.subplots as subplots
 import pandas as pd
 from dash.dependencies import Input, Output,State
 import plotly.graph_objs as go
-from random import random
 import plotly.express as px
 import plotly.io as pio
 import socket
@@ -32,7 +31,10 @@ from Current_layout import Current_layout
 
 
 
-pio.templates.default = "plotly_white"
+pio.templates.default = "plotly_dark" 
+
+#   IF USING SERIAL OR UDP COMUNICATOIN 
+
 #ser = serial.Serial(
 #    port='COM4',\
 #    baudrate=9600,\
@@ -49,10 +51,11 @@ pio.templates.default = "plotly_white"
 #                     socket.SOCK_DGRAM) # UDP
 #sock.bind((UDP_IP, UDP_PORT))
 
-
+""" CSS Styles Included in the design"""
 external_stylesheets = ['https://codepen.io/agarciag/pen/ZEEmeWr.css', #General CSS
-                        'https://codepen.io/agarciag/pen/gOOypaY.css'] #Particular CSS
-
+                        'https://codepen.io/agarciag/pen/wvBzaMN.css'] #Particular CSS
+# --------------------------------------------------------------------------------------
+""" File read and data preparation """
 
 file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/codes/full_kitchen_sensor/Data/kitchen_status.csv'
 file_pos='C:/Users/Alejandro/Desktop/MIT Media Lab/codes/full_kitchen_sensor/Data/user_position.csv'
@@ -61,12 +64,16 @@ data_tras=data.T
 user_pos=pd.read_csv(file_pos)
 liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/codes/terMITes/csv_serial.csv') 
 variables=data.columns
+
+# --------------------------------------------------------------------------------------
+""" Dash tool """
+
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 app.config.suppress_callback_exceptions = True
 colors ={
-        'background':'white',
-        'text': 'black',
-        'title': 'black',
+        'background':'black',
+        'text': 'white',
+        'title': 'lightgrey',
         'right': 'rgba(128, 128, 128, 0.2)',
         'kitchen_top': 'rgba(128, 128, 128, 0.5)',
         'led':'rgba(128, 128, 128, 0.1)'
@@ -75,29 +82,13 @@ colors ={
 app.layout=html.Div(children= [       
         html.Div(id='title',className='row pretty-container',children=[
                 html.Div([
-                        html.H5(['Piccolo Kitchen Data Visualisation'],
-                               className='ten columns main-title',
+                        html.H5(['Piccolo Kitchen Data Visualization'],
+                               className='seven columns main-title',
                                ),
-                        html.Img(className='one columns',
-                            src=app.get_asset_url("cs_logo.png"),
-                            id="cs-logo",
-    #                        style={"height": "90px", "width": "auto",
-    #                            "margin-bottom":"25px","margin-right":"10px",
-    #                       }
-                        ),
-                        html.Img(className='one columns',
-                            src=app.get_asset_url("media_logo.png"),
-                            id="media-logo",
-    #                        style={"height": "90px", "width": "auto",
-    #                            "margin-bottom": "25px","margin-right":"10px",
-    #                       }
-                        ),
-                        ]),
-                                
+                        html.H5(className='five columns main-subtitle',
+                                children=dcc.Markdown('Project developed by MIT Media Lab - [City Science](https://www.media.mit.edu/groups/city-science/overview/)')),    
+                        ]),                              
                 ]),
-        html.Div(id='SubHeader',className='row pretty-container',children=[
-                html.H2(className='twelve columns main-subtitle',children=dcc.Markdown('Project developed by MIT Media Lab - [City Science](https://www.media.mit.edu/groups/city-science/overview/)')),
-               ]),
         html.Div(
             [
                 dcc.Link(
@@ -134,7 +125,28 @@ app.layout=html.Div(children= [
             className="row all-tabs",
         ),
             dcc.Location(id='url',refresh=False),
-        html.Div(className='row',id='central-page'),
+        html.Div([
+                dcc.Upload(
+                    id='upload-data',
+                    children=html.Div([
+                        'Drag and Drop or ',
+                        html.A('Select Files')
+                    ]),
+                    style={
+                        'width': '100%',
+                        'height': '30px',
+                        'lineHeight': '30px',
+                        'borderWidth': '1px',
+                        'borderStyle': 'dashed',
+                        'borderRadius': '5px',
+                        'textAlign': 'center',
+                        'margin': '10px'
+                    },
+                    # Allow multiple files to be uploaded
+                    multiple=True
+                )]),
+        html.Div(id='hidden-div', style={'display':'none'}),
+        html.Div(className='row',id='central-page'),              
                   
 ])
 
@@ -145,7 +157,8 @@ Development_layout=html.Div([
                             
                         ])
 
-
+# --------------------------------------------------------------------------------------
+""" Callback functions included in the Dashboard """
     
 @app.callback(
         Output('main-graph','figure'),
@@ -155,24 +168,6 @@ Development_layout=html.Div([
 def data_graph(variable,value_s):
     figure=px.line(data,x='Time',y=variable,range_x=value_s)
     return  figure
-#{
-#            'data':[
-#                { 'x': data['Time'],
-#                  'y': data[variable],
-#                  'name': variable,
-#                  'marker': {'size': 20}
-#                  }],
-#            'layout': {
-#                        'title': 'Data Visualization',
-#                        'plot_bgcolor':colors['background'],
-#                        'paper_bgcolor': colors['background'],
-#                        'showgrid':True,
-#                        'font': {
-#                            'color': colors['text'],'size':20},
-#                       # 'height':850
-#  
-#                        }                     
-#                    }
                         
 @app.callback(
         Output('bar-sensor','figure'),
@@ -199,13 +194,12 @@ def user_bar_graph(value_y,value_c,value_s):
 #        [Input('pos-slider','value')]
         )
 def update_user_pos(n_intervals):
-    
-#    data=(ser.readline().decode('utf-8'))
-#    print(data)
-
-
     data_y=500
     data_x=500
+# ***IF USING SERIAL READ***
+#    data=(ser.readline().decode('utf-8'))
+#    print(data)
+    
 #    data=pd.DataFrame([[data_x,data_y]],columns=['x','y'])
 #    try:
 ##        data_x=data.split('/')[0]
@@ -218,26 +212,21 @@ def update_user_pos(n_intervals):
 ##        print(data_y)
 ##    figure=px.scatter(data,x='x',y='y')
     return  {
-            'data':[go.Scatter(x=[float(user_pos.iloc[n_intervals,0])],y=[float(user_pos.iloc[n_intervals,1])],marker_size=15,marker_color='#ffcccc'),
-                    go.Scatter(x=[float(user_pos.iloc[n_intervals+3,0])],y=[float(user_pos.iloc[n_intervals+3,1])],marker_size=15,marker_color='#ff8080'),
-                    go.Scatter(x=[float(user_pos.iloc[n_intervals+6,0])],y=[float(user_pos.iloc[n_intervals+6,1])],marker_size=15,marker_color='#ff4d4d'),
-                   go.Scatter(x=[float(user_pos.iloc[n_intervals+9,0])],y=[float(user_pos.iloc[n_intervals+9,1])],marker_size=15,marker_color='#ff0000')],
-#            'data':[go.Scatter(x=[data_x],y=[data_y],marker_size=20)],
-            'layout':{
-                      'marker': {'size': 30},
+            'data':[go.Scatter(x=[float(user_pos.iloc[n_intervals,0])],y=[float(user_pos.iloc[n_intervals,1])],marker_size=15,marker_color='#ff0000'),
+#                    go.Scatter(x=[float(user_pos.iloc[n_intervals+3,0])],y=[float(user_pos.iloc[n_intervals+3,1])],marker_size=15,marker_color='#ff8080'),
+#                    go.Scatter(x=[float(user_pos.iloc[n_intervals+6,0])],y=[float(user_pos.iloc[n_intervals+6,1])],marker_size=15,marker_color='#ff4d4d'),
+#                    go.Scatter(x=[float(user_pos.iloc[n_intervals+9,0])],y=[float(user_pos.iloc[n_intervals+9,1])],marker_size=15,marker_color='#ff0000')
+                    ],
+#           'data':[go.Scatter(x=[data_x],y=[data_y],marker_size=20)],
+            'layout':{'paper_bgcolor':colors['background'],
+                      'plot_bgcolor':colors['background'],
+                      'marker': {'size': 40},
                       'height':500,
                       'width':600,
-                      'xaxis':{'title':data_x,'range':[0,1200],'zeroline':False},
-                      'yaxis':{'title': data_y,'range':[0,1000],'zeroline':False}                                                     
+                      'xaxis':{'title':data_x,'range':[0,1200],'zeroline':False,'gridcolor':'grey'},
+                      'yaxis':{'title': data_y,'range':[0,1000],'zeroline':False,'gridcolor':'grey'}                                                     
                       }
               }    
-#@app.callback(
-#        Output('pie-sensor','hoverData'),
-#        [Input('main-graph','hoverData')])
-#def hover_graphs(hoverData):
-#    hoverData_new=(hoverData['points'][0]['pointNumber'])
-#    return hoverData_new
-#    
 
 @app.callback(
         Output('real-ter','figure'),
@@ -245,6 +234,7 @@ def update_user_pos(n_intervals):
 #        [Input('pos-slider','value')]
         )
 def update_real_ter(n_intervals):
+#    **IF CONNECTING TERMITA VIA UDP**
 #        data, addr = sock.recvfrom(1024) # buffer size is 1024 bytes
 #    
 #        temp=data.decode().replace(' = ',':').split(' ')[4].split(':')[1]
@@ -301,14 +291,19 @@ def generate_table_user(dataframe,variables):
         [html.Tr([html.Td(dataframe.loc[i][col]) for col in dataframe.columns]) for i in variables]
     )
 variables_table=['Position','Position Back','Position Front','Temperature','Humidity','Light']
+
 @app.callback(
         Output('hist-table','children'),
         [Input('table-slider','value')])
 def display_table(value):
-    data_table=data_tras.iloc[:,value:value+30]
+    data_table=data_tras.iloc[:,value:value+16]
     data_table.insert(0,'Variables',variables,True)
     return generate_table_user(data_table,variables_table)
-                    
+            
+
+# --------------------------------------------------------------------------------------
+""" Callback function which includes all different layouts """      
+  
 @app.callback(
         Output('central-page','children'),
         [Input('url','pathname')])
