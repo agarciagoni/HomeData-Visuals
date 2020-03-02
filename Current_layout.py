@@ -27,7 +27,7 @@ Current_layout=html.Div([
                                                  n_intervals=0),
                                     html.Div(className='', children=[
                                             html.H5('User Position'),
-                                            dcc.Slider(
+                                            dcc.Slider(className='eight columns',
                                                        id='pos-slider',
                                                        min=0,max=400,
                                                        step=1,

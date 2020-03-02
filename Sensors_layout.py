@@ -19,7 +19,7 @@ import plotly.io as pio
 # --------------------------------------------------------------------------------------
 """ Data Read """
 
-file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/codes/full_kitchen_sensor/Data/kitchen_status.csv'
+file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/kitchen_status.csv'
 data=pd.read_csv(file_name)
 variables=data.columns
 data_tras=data.T
@@ -47,74 +47,119 @@ pio.templates.default = "plotly_white"
 """ Layout """
 
 Sensors_layout=html.Div([
-      
-        html.Div(className='row four columns container',children=[
-                html.Div(className='row dropdown-container',children=[
-                    html.Label('Variables: '),
-                    dcc.Dropdown(className='eight columns',id='var-dropdown',options=[{'label':x, 'value':x} for x in variables],
-                                value='Position')
-                ]),
-                dcc.Graph(id='main-graph', className='graph',                                 
-                          ),
-                dcc.RangeSlider(id='first-slider',
-                                min=0,max=900, step=1, value=[0,900])]), 
-        html.Div(className='row four columns container',children=[
-            html.Div(className='row dropdown-container', children=[
-                    html.Div(className='six columns', children=[
-                        html.Label('Variable X:'),
-                        dcc.Dropdown(className='',id='bar-sensor-x',options=[{'label':'Position Back', 'value':'Position Back'},
-                                                                      {'label':'Position Front', 'value':'Position Front'},
-                                                                      {'label':'Position', 'value':'Position'}],
-#                                                                      {'label':'Sound 1', 'value':'Sound 1'},
-#                                                                      {'label':'Sound 2', 'value':'Sound 2'}],#for x in variables, ##Make it General
-                                                        value='Position Back')
-                        ]),   
-                    html.Div(className='six columns', children=[              
-                        html.Label('Variable Comp:'),
-                        dcc.Dropdown(id='bar-sensor-compare',options=[{'label':'Position Back', 'value':'Position Back'},
-                                                                      {'label':'Position Front', 'value':'Position Front'},
-                                                                      {'label':'Position', 'value':'Position'}],
-#                                                                      {'label':'Sound 1', 'value':'Sound 1'},
-#                                                                      {'label':'Sound 2', 'value':'Sound 2'}],
-                                                        value='Position')]),
-    #                    html.Br()
-#                    dcc.RangeSlider(id='second-slider',
-#                                min=0,max=900, step=1, value=[0,900])]), 
-                    
-            ]),
-            html.Div(className='', children=[
-                    dcc.Graph(id='bar-sensor')])
-            ]),
-     
-#        html.Br(),
-        html.Div(className='row four columns container',children=[
-
-            html.Div(className='row dropdown-container', children=[
-                    html.Div(className='six columns', children=[
-                        html.Label('Variable X:'),
-                        dcc.Dropdown(className='',id='pie-sensor-x',options=[{'label':'Sound 1', 'value':'Sound 1'},
-                                                                             {'label':'Sound 2', 'value':'Sound 2'}],#for x in variables, ##Make it General
-                                                        value='Sound 1')]),
-    
-                    html.Div(className='six columns', children=[              
-                        html.Label('Variable Comp:'),
-                        dcc.Dropdown(id='pie-sensor-compare',options=[{'label':'Temperature', 'value':'Temperature'},
-                                                                      {'label':'Humidity', 'value':'Humidity'},
-                                                                      {'label':'Light', 'value':'Light'},
-                                                                      {'label':'Sound 1', 'value':'Sound 1'},
-                                                                      {'label':'Sound 2', 'value':'Sound 2'}],#for x in variables, ##Make it General
-                                                        value='Temperature')]),
+        html.Div(className='row eleven columns',children=[
+                dcc.Upload(
+                    id='upload-data',
+                    children=html.Div([
+                        'Drag and Drop or ',
+                        html.A('Select Files')
                     ]),
-            html.Div(className='row', children=[
-                    dcc.Graph(id='pie-sensor'),
-                    dcc.RangeSlider(id='third-slider',
-                                min=0,max=900, step=1, value=[0,900], 
-                             )])
-            ]),
+                    style={
+                        'width': '100%',
+                        'height': '30px',
+                        'lineHeight': '30px',
+                        'borderWidth': '1px',
+                        'borderStyle': 'dashed',
+                        'borderRadius': '5px',
+                        'textAlign': 'center',
+                        'margin': '10px'
+                    },
+                    # Allow multiple files to be uploaded
+                    multiple=True
+                )]),
+        html.Div(className='twelve columns',children=[
+            html.Div(className='row four columns container',children=[
+                    html.Div(className='row dropdown-container',children=[
+    #                    html.Label('Variables: '),
+                        dcc.Dropdown(className='',id='var-dropdown',#options=[{'label':x, 'value':x} for x in variables]
+                                                                                 options=[{'label': 'Time', 'value': 'Time'},
+                                                                                         {'label': 'User Position', 'value': 'Position'},                                                                                                                                                                                
+                                                                                         {'label': 'Position Back Cabinet', 'value': 'Position Back'},
+                                                                                         {'label': 'Position Front Cabiner', 'value': 'Position Front'},
+                                                                                         {'label': 'Nº Mov Back', 'value': 'N Mov Back'},
+                                                                                         {'label': 'Nº Back pos', 'value': 'N Back pos'},
+                                                                                         {'label': 'Nº Back total', 'value': 'N Back total'},
+                                                                                         {'label': 'Nº Mov Front', 'value': 'N Mov Front'},
+                                                                                         {'label': 'Nº Front pos', 'value': 'N Front pos'},
+                                                                                         {'label': 'Nº Front total', 'value': 'N Front total'}],                                                                                        
+                                    value='Position')
+                    ]),
+                    dcc.Graph(id='main-graph', className='graph',                                 
+                              ),
+                    dcc.RangeSlider(className='margin100',id='first-slider',
+                                    min=0,max=900, step=1, value=[0,900])]), 
+            html.Div(className='row four columns container',children=[
+                html.Div(className='row dropdown-container', children=[
+                        html.Div(className='six columns', children=[
+    #                        html.Label('Variable X:'),
+                            dcc.Dropdown(className='',id='bar-sensor-x',options=[{'label':'Position Back Cabinet', 'value':'Position Back'},
+                                                                          {'label':'Position Front Cabinet', 'value':'Position Front'},
+                                                                          {'label':'Position of the User', 'value':'Position'}],
+    #                                                                      {'label':'Sound 1', 'value':'Sound 1'},
+    #                                                                      {'label':'Sound 2', 'value':'Sound 2'}],#for x in variables, ##Make it General
+                                                            value='Position Back')
+                            ]),   
+                        html.Div(className='six columns', children=[              
+    #                        html.Label('Variable Comp:'),
+                            dcc.Dropdown(id='bar-sensor-compare',options=[{'label':'Position Back Cabinet', 'value':'Position Back'},
+                                                                          {'label':'Position Front Cabinet', 'value':'Position Front'},
+                                                                          {'label':'Position of the User', 'value':'Position'}],
+    #                                                                      {'label':'Sound 1', 'value':'Sound 1'},
+    #                                                                      {'label':'Sound 2', 'value':'Sound 2'}],
+                                                            value='Position')]),
+        #                    html.Br()
+    #                    dcc.RangeSlider(id='second-slider',
+    #                                min=0,max=900, step=1, value=[0,900])]), 
+                        
+                ]),
+                html.Div(className='', children=[
+                        dcc.Graph(id='bar-sensor')])
+                ]),
+         
+    #        html.Br(),
+            html.Div(className='row four columns container',children=[
+    
+                html.Div(className='row dropdown-container', children=[
+                        html.Div(className='six columns', children=[
+    #                        html.Label('Variable X:'),
+                            dcc.Dropdown(className='',id='pie-sensor-x',options=[{'label':'Sound 1', 'value':'Sound 1'},
+                                                                                 {'label':'Sound 2', 'value':'Sound 2'},
+                                                                                 {'label':'Temperature', 'value':'Temperature'},                                                                                                                                                
+                                                                                 {'label': 'Humidity', 'value': 'Humidity'},
+                                                                                 {'label': 'Light', 'value': 'Light'}],#for x in variables, ##Make it General
+                                                            value='Sound 1')]),
+        
+                        html.Div(className='six columns', children=[              
+    #                        html.Label('Variable Comp:'),
+                            dcc.Dropdown(id='pie-sensor-compare',options=[{'label':'Temperature', 'value':'Temperature'},
+                                                                          {'label':'Humidity', 'value':'Humidity'},
+                                                                          {'label':'Light', 'value':'Light'},
+                                                                          {'label':'Sound 1', 'value':'Sound 1'},
+                                                                          {'label':'Sound 2', 'value':'Sound 2'}],#for x in variables, ##Make it General
+                                                            value='Temperature')]),
+                        ]),
+                html.Div(className='row', children=[
+                        dcc.Graph(id='pie-sensor'),
+                        dcc.RangeSlider(className='margin100',id='third-slider',
+                                    min=0,max=900, step=1, value=[0,900], 
+                                 )])
+                ]),
+        ]),
         html.Div(className='eleven columns',style={'overflow-x':'scroll'}, children=[
             html.H3('User data table',className='third-title'),
-            dcc.Slider(id='table-slider',
-                       min=0, max=800,step=1,value=0),
+            dcc.Slider(className='margin30',id='table-slider',
+                       min=0, max=data.shape[0],step=1,value=10,
+                       marks={
+                                10: {'label': data.iloc[10,0], 'style': {'fontSize':15,'color': 'white'}},
+                                round(data.shape[0]/4): {'label': data.iloc[round(data.shape[0]/4),0], 'style': {'fontSize':15,'color': 'white'}},
+                                round(data.shape[0]/2): {'label':  data.iloc[round(data.shape[0]/2),0], 'style': {'fontSize':15,'color': 'white'}},
+                                round(3*data.shape[0]/4): {'label': data.iloc[round(3*data.shape[0]/4),0], 'style': {'fontSize':15,'color': 'white'}},
+                                data.shape[0]-20: {'label': data.iloc[data.shape[0]-20,0], 'style': {'fontSize':15,'color': 'white'}}    
+                                          },
+#                       tooltip={'always_visible':False},
+#                       updatemode='drag'
+                      ),
+            html.Br(),
             html.Div(id='hist-table'),
            
         ])                                 

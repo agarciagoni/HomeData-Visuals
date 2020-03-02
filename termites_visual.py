@@ -17,7 +17,7 @@ import plotly.graph_objs as go
 # --------------------------------------------------------------------------------------
 """ Subplots definition """
 
-liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/codes/terMITes/csv_serial.csv')
+liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/csv_serial.csv')
 colors ={
         'background':'black',
         'text': 'white',
