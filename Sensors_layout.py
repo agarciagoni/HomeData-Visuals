@@ -145,7 +145,7 @@ Sensors_layout=html.Div([
                                  )])
                 ]),
         ]),
-        html.Div(className='eleven columns',style={'overflow-x':'scroll'}, children=[
+        html.Div(className='eleven columns',style={'overflow-x':''}, children=[ #could define overflow-x scroll if needed
             html.H3('User data table',className='third-title'),
             dcc.Slider(className='margin30',id='table-slider',
                        min=0, max=data.shape[0],step=1,value=10,
