@@ -16,5 +16,5 @@ Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejan
 
 Current status: [Under Develoment]
 
-![Current Status] (Status/current_status_dark.gif)
+![Current Status] (/Status/current_status_dark.gif)
 
