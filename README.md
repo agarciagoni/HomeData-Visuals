@@ -16,5 +16,5 @@ Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejan
 
 Current status: [Under Develoment]
 
-![Current Status] (Status/current-status.gif)
+![Current Status] (https://github.com/agarciagoni/HomeData-Visuals/tree/master/Status/current-status.gif)
 
