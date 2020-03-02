@@ -1,6 +1,7 @@
 # Kitchen-visual
 Here we will include all the code aiming to show the data gathered from the Piccolo Kitchen project. https://www.media.mit.edu/projects/piccolo-kitchen/overview/
 
+***Update***
 
 In this first iteration we have used Dash tool from plotly to show the first live data from three terMITes.
 
