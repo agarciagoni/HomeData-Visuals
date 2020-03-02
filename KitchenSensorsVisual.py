@@ -56,15 +56,14 @@ external_stylesheets = ['https://codepen.io/agarciag/pen/ZEEmeWr.css', #General 
                         'https://codepen.io/agarciag/pen/wvBzaMN.css'] #Particular CSS
 # --------------------------------------------------------------------------------------
 """ File read and data preparation """
-
-file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/codes/full_kitchen_sensor/Data/kitchen_status.csv'
-file_pos='C:/Users/Alejandro/Desktop/MIT Media Lab/codes/full_kitchen_sensor/Data/user_position.csv'
+file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/kitchen_status.csv'
+file_pos='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/user_position.csv'
 data=pd.read_csv(file_name)
-data_tras=data.T
+data_tras=data.set_index('Time').T
 user_pos=pd.read_csv(file_pos)
-liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/codes/terMITes/csv_serial.csv') 
+liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/csv_serial.csv') 
 variables=data.columns
-
+variables_time=data.set_index('Time').columns
 # --------------------------------------------------------------------------------------
 """ Dash tool """
 
@@ -100,51 +99,32 @@ app.layout=html.Div(children= [
                     "Current status", href="/dash-kitchen-report/Current-status",
                     className="tab"
                 ),
+#                dcc.Link(
+#                    "TerMITes",
+#                    href="/dash-kitchen-report/terMITes",
+#                    className="tab",
+#                ),
                 dcc.Link(
-                    "TerMITes",
-                    href="/dash-kitchen-report/terMITes",
-                    className="tab",
-                ),
-                dcc.Link(
-                    "User-Kitchen Interaction",
+                    "Historical Data Visualisation",
                     href="/dash-kitchen-report/sensors",
                     className="tab",
                 ),
 
-                dcc.Link(
-                    "Overall Analysis",
-                    href="/dash-financial-report/distributions",
-                    className="tab",
-                ),
-                dcc.Link(
-                    "Comments",
-                    href="/dash-financial-report/news-and-reviews",
-                    className="tab",
-                ),
+#                dcc.Link(
+#                    "Overall Analysis",
+#                    href="/dash-financial-report/distributions",
+#                    className="tab",
+#                ),
+#                dcc.Link(
+#                    "Comments",
+#                    href="/dash-financial-report/news-and-reviews",
+#                    className="tab",
+#                ),
             ],
             className="row all-tabs",
         ),
             dcc.Location(id='url',refresh=False),
-        html.Div([
-                dcc.Upload(
-                    id='upload-data',
-                    children=html.Div([
-                        'Drag and Drop or ',
-                        html.A('Select Files')
-                    ]),
-                    style={
-                        'width': '100%',
-                        'height': '30px',
-                        'lineHeight': '30px',
-                        'borderWidth': '1px',
-                        'borderStyle': 'dashed',
-                        'borderRadius': '5px',
-                        'textAlign': 'center',
-                        'margin': '10px'
-                    },
-                    # Allow multiple files to be uploaded
-                    multiple=True
-                )]),
+
         html.Div(id='hidden-div', style={'display':'none'}),
         html.Div(className='row',id='central-page'),              
                   
@@ -166,7 +146,7 @@ Development_layout=html.Div([
          Input('first-slider','value')])
 
 def data_graph(variable,value_s):
-    figure=px.line(data,x='Time',y=variable,range_x=value_s)
+    figure=px.line(data,x='Time',y=variable,title='User Interaction',range_x=value_s,color_discrete_sequence=px.colors.diverging.Tealrose)
     return  figure
                         
 @app.callback(
@@ -174,7 +154,7 @@ def data_graph(variable,value_s):
         [Input('bar-sensor-x','value'),
          Input('bar-sensor-compare','value')])
 def user_bar_graph(value_x,value_c):
-    figure=px.histogram(data,x=value_x ,color=value_c)#,marginal='rug')
+    figure=px.histogram(data,x=value_x ,color=value_c,title='Position Study',color_discrete_sequence=px.colors.diverging.Tealrose)#,marginal='rug')
     figure.update_layout({'legend_orientation':'h'})
     return figure
 
@@ -184,7 +164,7 @@ def user_bar_graph(value_x,value_c):
          Input('pie-sensor-compare','value'),
          Input('third-slider','value')])
 def user_bar_graph(value_y,value_c,value_s):
-    figure=px.scatter(data,x='Time',y=value_y ,color=value_c,title='Sound',range_x=value_s)#,marginal='rug')
+    figure=px.scatter_3d(data,x='Time',y=value_y ,z=value_c,color='Light',title='Enviromental Data',range_x=value_s,color_continuous_scale=px.colors.diverging.Tealrose)#,marginal='rug')
     figure.update_layout({'legend_orientation':'h'})
     return figure
 
@@ -242,21 +222,21 @@ def update_real_ter(n_intervals):
 #        lit=data.decode().replace(' = ',':').split(' ')[5].split(':')[1]
         
         trace_t=go.Scatter(                         
-                      y= liv_ter.iloc[-200:,4].tolist(),
+                      y= liv_ter.iloc[-1000:,4].tolist(),
                       line={'color':'red'},
                       fill='tozeroy',
                       fillcolor='rgba(255,102,102,0.1)',
                      
                      )
         trace_h=go.Scatter(             
-                      y= liv_ter.iloc[-200:,6].tolist(),
+                      y= liv_ter.iloc[-1000:,6].tolist(),
                       line={'color':'blue'},
                       fill='tozeroy',
                       fillcolor='rgba(153,153,255,0.1)',
 #                      mode='lines+markers'
                      )
         trace_l=go.Scatter(             
-                      y= liv_ter.iloc[-200:,5].tolist(),
+                      y= liv_ter.iloc[-1000:,5].tolist(),
                       line={'color':'yellow'},
                       fill='tozeroy',
                       fillcolor='rgba(230,255,0,0.1)'
@@ -272,13 +252,13 @@ def update_real_ter(n_intervals):
         fig['layout'].update(height=700,plot_bgcolor=colors['background'],
                             paper_bgcolor=colors['background'], showlegend=False,
                             xaxis={'gridcolor':'dimgrey','showgrid':True},
-                            yaxis={#'range':[26,31],
+                            yaxis={'range':[27,31],
                                    'title': 'ºC','gridcolor':'dimgrey','showgrid':True},
                             xaxis2={'gridcolor':'dimgrey','showgrid':True},
-                            yaxis2={#'range':[29.5,31.5],
+                            yaxis2={'range':[29,30],
                                     'title':'%','gridcolor':'dimgrey','showgrid':True},
                             xaxis3={'gridcolor':'dimgrey','showgrid':True},
-                            yaxis3={#'range':[250,700],
+                            yaxis3={'range':[500,600],
                                     'title':'Lux','gridcolor':'dimgrey','showgrid':True},
                             font={'color':colors['text']})
         return  fig
@@ -297,7 +277,7 @@ variables_table=['Position','Position Back','Position Front','Temperature','Humi
         [Input('table-slider','value')])
 def display_table(value):
     data_table=data_tras.iloc[:,value:value+16]
-    data_table.insert(0,'Variables',variables,True)
+    data_table.insert(0,'Variables \ Time',variables_time,True)
     return generate_table_user(data_table,variables_table)
             
 
