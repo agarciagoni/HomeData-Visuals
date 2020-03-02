@@ -14,7 +14,3 @@ The three different indicators in the right side show information every 5 second
 Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejandro Garcia Goni agarciag@mit.edu / garciagoni.alejandro@gmail.com
 
 
-Current status: [Under Develoment]
-
-![Current Status] (Status/current-status.gif)
-
