@@ -28,7 +28,7 @@ from header_extra import Header
 from termites_visual import terMITes_layout
 from Sensors_layout import Sensors_layout
 from Current_layout import Current_layout
-
+from Storage_layout import Storage_layout
 
 
 pio.templates.default = "plotly_dark" 
@@ -110,11 +110,11 @@ app.layout=html.Div(children= [
                     className="tab",
                 ),
 
-#                dcc.Link(
-#                    "Overall Analysis",
-#                    href="/dash-financial-report/distributions",
-#                    className="tab",
-#                ),
+                dcc.Link(
+                    "Storage Status",
+                    href="/dash-kitchen-report/storage",
+                    className="tab",
+                ),
 #                dcc.Link(
 #                    "Comments",
 #                    href="/dash-financial-report/news-and-reviews",
@@ -276,10 +276,20 @@ variables_table=['Position','Position Back','Position Front','Temperature','Humi
         Output('hist-table','children'),
         [Input('table-slider','value')])
 def display_table(value):
-    data_table=data_tras.iloc[:,value:value+16]
+    data_table=data_tras.iloc[:,value:value+15]
     data_table.insert(0,'Variables \ Time',variables_time,True)
     return generate_table_user(data_table,variables_table)
             
+# --------------------------------------------------------------------------------------
+""" Data upload functions """
+
+#@app.callback(
+#        Output('hist-table','children'),
+#        [Input('table-slider','value')])
+#def update_data(filename):
+#    
+#    return data
+
 
 # --------------------------------------------------------------------------------------
 """ Callback function which includes all different layouts """      
@@ -297,10 +307,13 @@ def display_page(pathname):
     elif (pathname=="/dash-kitchen-report/sensors"):
         return (Sensors_layout               
                 )
+    elif (pathname=="/dash-kitchen-report/storage"):
+        return (Storage_layout               
+                )
     else:
         return(Development_layout             
                )                        
                         
 #Main
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=True,port=8888)
