@@ -12,7 +12,8 @@ The three different indicators in the right side show information every 5 second
 
 The sensors included in the project and their codes are included in this other repository: https://github.com/agarciagoni/HomeData
 
-
+### Current Status ###
+  ![Gif](https://github.com/agarciagoni/HomeData-Visuals/blob/master/Status/3_16_2020.gif)
 
 Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejandro Garcia Goni agarciag@mit.edu / garciagoni.alejandro@gmail.com
 
