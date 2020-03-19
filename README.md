@@ -18,9 +18,16 @@ The sensors included in the project and their codes are included in this other r
 Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejandro Garcia Goni agarciag@mit.edu / garciagoni.alejandro@gmail.com
 
 ### To run the tool ###
-``include code``
+Get the repository with data, assets and all layouts
+```bash
+$ git clone https://github.com/agarciagoni/HomeData-Visuals
+$ cd HomeData-Visuals
+$ python3 DataVisuals.py
+```
 
 ### Install ###
-include requirements*
-
+To install requirements needed
+```bash
+$ pip3 install -r requirements.txt
+```
 
