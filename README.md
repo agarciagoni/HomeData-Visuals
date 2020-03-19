@@ -17,4 +17,10 @@ The sensors included in the project and their codes are included in this other r
 
 Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejandro Garcia Goni agarciag@mit.edu / garciagoni.alejandro@gmail.com
 
+### To run the tool ###
+``include code``
+
+### Install ###
+include requirements*
+
 
