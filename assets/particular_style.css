@@ -146,7 +146,7 @@ tab:hover{
 .pretty-container:hover{
   box-shadow:1px 1px 1px 1px grey;
   filter: brightness(150%);
-  transform: scale(1) translateX(15px) ;
+  transform: scale(1, 1.1) translateX(15px) ;
 /*  transform: translateX(20px) rotate(1080deg);*/
   
 }

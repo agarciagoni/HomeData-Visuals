@@ -26,6 +26,7 @@ import socket
 
 import sys
 sys.path.append('layouts/')
+sys.path.append('assets/')
 
 from header_extra import Header
 from Project_Overview_layout import Project_Overview_layout
@@ -95,7 +96,7 @@ app.layout=html.Div(children= [
         html.Div(
             [
                 dcc.Link(
-                    "Project Ovewview",
+                    "Project Overview",
                     href="/dash-kitchen-report/overview",
                     className="tab first",
                 ),
