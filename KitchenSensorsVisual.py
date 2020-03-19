@@ -25,6 +25,7 @@ import plotly.io as pio
 import socket
 
 from header_extra import Header
+from Project_Overview_layout import Project_Overview_layout
 from termites_visual import terMITes_layout
 from Sensors_layout import Sensors_layout
 from Current_layout import Current_layout
@@ -52,8 +53,8 @@ pio.templates.default = "plotly_dark"
 #sock.bind((UDP_IP, UDP_PORT))
 
 """ CSS Styles Included in the design"""
-external_stylesheets = ['https://codepen.io/agarciag/pen/ZEEmeWr.css', #General CSS
-                        'https://codepen.io/agarciag/pen/wvBzaMN.css'] #Particular CSS
+#external_stylesheets = ['https://codepen.io/agarciag/pen/ZEEmeWr.css', #General CSS
+#                        'https://codepen.io/agarciag/pen/WNvZbOo.css'] #Particular CSS
 # --------------------------------------------------------------------------------------
 """ File read and data preparation """
 file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/kitchen_status.csv'
@@ -67,7 +68,7 @@ variables_time=data.set_index('Time').columns
 # --------------------------------------------------------------------------------------
 """ Dash tool """
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)#, external_stylesheets=external_stylesheets)
 app.config.suppress_callback_exceptions = True
 colors ={
         'background':'black',
@@ -79,7 +80,7 @@ colors ={
         }
 
 app.layout=html.Div(children= [       
-        html.Div(id='title',className='row pretty-container',children=[
+        html.Div(id='title',className='row',children=[
                 html.Div([
                         html.H5(['Piccolo Kitchen Data Visualization'],
                                className='seven columns main-title',
@@ -91,8 +92,8 @@ app.layout=html.Div(children= [
         html.Div(
             [
                 dcc.Link(
-                    "Project Information",
-                    href="/dash-financial-report/overview",
+                    "Project Ovewview",
+                    href="/dash-kitchen-report/overview",
                     className="tab first",
                 ),
                 dcc.Link(
@@ -298,7 +299,10 @@ def display_table(value):
         Output('central-page','children'),
         [Input('url','pathname')])
 def display_page(pathname):
-    if pathname=="/dash-kitchen-report/Current-status":
+    if pathname=="/dash-kitchen-report/overview":
+        return(Project_Overview_layout
+               )
+    elif pathname=="/dash-kitchen-report/Current-status":
         return(Current_layout
                )
     elif (pathname=="/dash-kitchen-report/terMITes"):

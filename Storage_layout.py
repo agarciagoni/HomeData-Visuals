@@ -28,7 +28,7 @@ Storage_layout=html.Div([
                                 children=['Storage Kitchen Status']),
                         html.Div(className='row',children=[
                             html.Div(className='five columns',children=[
-                                    html.Div(className='row box',children=[
+                                    html.Div(className='pretty-container row eleven columns',children=[
                                            html.H4('Back Cabinet'),
                                            html.Div(className='row eleven columns',children=[
                                                    html.Div(className='four columns',children=[
@@ -96,14 +96,14 @@ Storage_layout=html.Div([
                                                                       size=10
                                                                     ),
                                                                  html.H6(className='nine columns', children="Low")]),
-                                                         html.H6(className='seven columns',children=[
+                                                         html.H6(className='six columns',children=[
                                                         'Number of Interactions']),
-                                                         html.H6(className='five columns',children=
+                                                         html.H6(className='four columns',children=
                                                          "7")  
                                                    ]),
                                             ]),
                                     
-                                    html.Div(className='row',children=[
+                                    html.Div(className='pretty-container row eleven columns',children=[
                                            html.H4('Right Front Cabinet'),
                                            html.Div(className='row eleven columns',children=[
                                                    html.Div(className='four columns',children=[
@@ -161,13 +161,12 @@ Storage_layout=html.Div([
                                                                     ),
                                                                  html.H6(className='nine columns', children="Down")]),
 
-                                                         html.H6(className='seven columns',children=[
+                                                         html.H6(className='six columns',children=[
                                                         'Number of Interactions']),
-                                                         html.H6(className='five columns',children=
+                                                         html.H6(className='four columns',children=
                                                          "3"),]),
-                                    ]),
-                                                                 
-                                    html.Div(className='row',children=[
+                                    ]),                              
+                                    html.Div(className='pretty-container row eleven columns',children=[
                                            html.H4('Left Front Cabinet'),
                                            html.Div(className='row eleven columns',children=[
                                                    html.Div(className='four columns',children=[
@@ -225,9 +224,9 @@ Storage_layout=html.Div([
                                                                     ),
                                                                  html.H6(className='nine columns', children="Down")]),
 
-                                                         html.H6(className='seven columns',children=[
+                                                         html.H6(className='six columns',children=[
                                                         'Number of Interactions']),
-                                                         html.H6(className='five columns',children=
+                                                         html.H6(className='four columns',children=
                                                          "2")
                                                          ]),
 
