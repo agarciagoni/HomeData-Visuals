@@ -24,6 +24,9 @@ import plotly.express as px
 import plotly.io as pio
 import socket
 
+import sys
+sys.path.append('layouts/')
+
 from header_extra import Header
 from Project_Overview_layout import Project_Overview_layout
 from termites_visual import terMITes_layout
