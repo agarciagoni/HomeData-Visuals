@@ -8,7 +8,7 @@ More info: https://www.media.mit.edu/projects/piccolo-kitchen/overview/
 The sensors included in the project and their codes are included in this other repository: https://github.com/agarciagoni/HomeData
 
 ### Current Status ###
-  ![Gif](https://github.com/agarciagoni/HomeData-Visuals/blob/master/Status/3_16_2020.gif)
+  ![Gif](https://github.com/agarciagoni/HomeData-Visuals/blob/master/Status/status.gif)
 
 Visualisation tool for a set of sensors deployed in a kitchen prototype - Alejandro Garcia Goni                            agarciag@mit.edu / garciagoni.alejandro@gmail.com
 
