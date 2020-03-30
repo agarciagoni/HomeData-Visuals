@@ -26,7 +26,6 @@ import socket
 
 import sys
 sys.path.append('layouts/')
-sys.path.append('assets/')
 
 from header_extra import Header
 from Project_Overview_layout import Project_Overview_layout

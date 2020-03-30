@@ -1,4 +1,4 @@
-# Kitchen-visual
+# HomeData-Visuals
 Here we will include all the code aiming to show the data gathered from the Piccolo Kitchen project. 
 The project consists of a transformable kitchen, using architectural robotics for a hyper-efficent use of space.
 In a built prototype we include a wide range of sensors aiming to detect activity and study behavior in a new transformable enviroment.   
