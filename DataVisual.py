@@ -274,7 +274,7 @@ def generate_table_user(dataframe,variables):
         # Body  
         [html.Tr([html.Td(dataframe.loc[i][col]) for col in dataframe.columns]) for i in variables]
     )
-variables_table=['Position','Position Back','Position Front','Temperature','Humidity','Light']
+variables_table=['Position','Position Back','Position Front R','Position Front L','Temperature','Humidity','Light']
 
 @app.callback(
         Output('hist-table','children'),

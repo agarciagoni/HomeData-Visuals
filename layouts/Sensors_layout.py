@@ -26,7 +26,7 @@ data_tras=data.T
 data_table=data_tras.iloc[:,10:15]
 data_table.insert(0,'Variables',variables,True)
 data_tras.insert(0,'Variables',variables,True)
-variables_table=['Position','Position Back','Position Front','Temperature','Humidity','Light']
+variables_table=['Position','Position Back','Position Front R','Position Front L','Temperature','Humidity','Light']
 
 # --------------------------------------------------------------------------------------
 """ Functions """
@@ -75,13 +75,17 @@ Sensors_layout=html.Div([
                                                                                  options=[{'label': 'Time', 'value': 'Time'},
                                                                                          {'label': 'User Position', 'value': 'Position'},                                                                                                                                                                                
                                                                                          {'label': 'Position Back Cabinet', 'value': 'Position Back'},
-                                                                                         {'label': 'Position Front Cabiner', 'value': 'Position Front'},
+                                                                                         {'label': 'Position Front Right Cabinet', 'value': 'Position Front R'},
+                                                                                          {'label': 'Position Front Left Cabinet', 'value': 'Position Front L'},
                                                                                          {'label': 'Nº Mov Back', 'value': 'N Mov Back'},
                                                                                          {'label': 'Nº Back pos', 'value': 'N Back pos'},
                                                                                          {'label': 'Nº Back total', 'value': 'N Back total'},
-                                                                                         {'label': 'Nº Mov Front', 'value': 'N Mov Front'},
-                                                                                         {'label': 'Nº Front pos', 'value': 'N Front pos'},
-                                                                                         {'label': 'Nº Front total', 'value': 'N Front total'}],                                                                                        
+                                                                                         {'label': 'Nº Mov Front Right', 'value': 'N Mov Front R'},
+                                                                                         {'label': 'Nº Front pos Right', 'value': 'N Front pos R'},
+                                                                                         {'label': 'Nº Front total Right', 'value': 'N Front total R'},
+                                                                                         {'label': 'Nº Mov Front Left', 'value': 'N Mov Front L'},
+                                                                                         {'label': 'Nº Front pos Left', 'value': 'N Front pos L'},
+                                                                                         {'label': 'Nº Front total Left', 'value': 'N Front total L'}],                                                                                        
                                     value='Position')
                     ]),
                     dcc.Graph(id='main-graph', className='graph',                                 
@@ -93,7 +97,8 @@ Sensors_layout=html.Div([
                         html.Div(className='six columns', children=[
     #                        html.Label('Variable X:'),
                             dcc.Dropdown(className='',id='bar-sensor-x',options=[{'label':'Position Back Cabinet', 'value':'Position Back'},
-                                                                          {'label':'Position Front Cabinet', 'value':'Position Front'},
+                                                                          {'label':'Position Front Right Cabinet', 'value':'Position Front R'},
+                                                                          {'label':'Position Front Left Cabinet', 'value':'Position Front L'},
                                                                           {'label':'Position of the User', 'value':'Position'}],
     #                                                                      {'label':'Sound 1', 'value':'Sound 1'},
     #                                                                      {'label':'Sound 2', 'value':'Sound 2'}],#for x in variables, ##Make it General
@@ -102,7 +107,8 @@ Sensors_layout=html.Div([
                         html.Div(className='six columns', children=[              
     #                        html.Label('Variable Comp:'),
                             dcc.Dropdown(id='bar-sensor-compare',options=[{'label':'Position Back Cabinet', 'value':'Position Back'},
-                                                                          {'label':'Position Front Cabinet', 'value':'Position Front'},
+                                                                          {'label':'Position Front Right Cabinet', 'value':'Position Front R'},
+                                                                          {'label':'Position Front Left Cabinet', 'value':'Position Front L'},
                                                                           {'label':'Position of the User', 'value':'Position'}],
     #                                                                      {'label':'Sound 1', 'value':'Sound 1'},
     #                                                                      {'label':'Sound 2', 'value':'Sound 2'}],
