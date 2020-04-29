@@ -32,6 +32,7 @@ from Project_Overview_layout import Project_Overview_layout
 from termites_visual import terMITes_layout
 from Sensors_layout import Sensors_layout
 from Current_layout import Current_layout
+from Enviromental import Enviromental_layout
 from Storage_layout import Storage_layout
 
 
@@ -100,7 +101,7 @@ app.layout=html.Div(children= [
                     className="tab first",
                 ),
                 dcc.Link(
-                    "Current status", href="/dash-kitchen-report/Current-status",
+                    "Enviroment", href="/dash-kitchen-report/Enviroment",
                     className="tab"
                 ),
 #                dcc.Link(
@@ -305,8 +306,8 @@ def display_page(pathname):
     if pathname=="/dash-kitchen-report/overview":
         return(Project_Overview_layout
                )
-    elif pathname=="/dash-kitchen-report/Current-status":
-        return(Current_layout
+    elif pathname=="/dash-kitchen-report/Enviroment":
+        return(Enviromental_layout
                )
     elif (pathname=="/dash-kitchen-report/terMITes"):
         return(terMITes_layout
