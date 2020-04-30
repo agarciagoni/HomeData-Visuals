@@ -19,7 +19,7 @@ import plotly.io as pio
 # --------------------------------------------------------------------------------------
 """ Data Read """
 
-file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/kitchen_status.csv'
+file_name='kitchen_status.csv'
 data=pd.read_csv(file_name)
 variables=data.columns
 data_tras=data.T
