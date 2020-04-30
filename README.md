@@ -6,7 +6,7 @@ In a built prototype we include a wide range of sensors aiming to detect activit
 More info: https://www.media.mit.edu/projects/piccolo-kitchen/overview/
 
 The sensors included in the project and their codes are included in this other repository: https://github.com/agarciagoni/HomeData
-
+Check the dashboard here: https://home-data-visuals.herokuapp.com/ !
 ### Current Status ###
 <p align="center">
   <img src="https://github.com/agarciagoni/HomeData-Visuals/blob/master/Status/status.gif" width="700" height="400">
