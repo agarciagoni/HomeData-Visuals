@@ -313,7 +313,7 @@ def display_page(pathname):
     if pathname=="/kitchen-report/overview":
         return(Project_Overview_layout
                )
-    elif pathname=="/dash-kitchen-report/Enviroment":
+    elif pathname=="/kitchen-report/EnviromentData":
         return(Enviromental_layout
                )
     elif (pathname=="/kitchen-report/HistoricData"):
