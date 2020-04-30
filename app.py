@@ -83,6 +83,8 @@ colors ={
         'led':'rgba(128, 128, 128, 0.1)'
         }
 
+server=app.server
+
 app.layout=html.Div(children= [       
         html.Div(id='title',className='row',children=[
                 html.Div([
@@ -331,4 +333,4 @@ def display_page(pathname):
                    
 #Main
 if __name__ == "__main__":
-    app.run_server(debug=True,port=8888)
+    app.run_server(debug=True)
