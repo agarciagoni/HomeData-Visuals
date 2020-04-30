@@ -84,7 +84,7 @@ colors ={
         }
 
 server=app.server
-
+app.title="Home Data Dashboard"
 app.layout=html.Div(children= [       
         html.Div(id='title',className='row',children=[
                 html.Div([
