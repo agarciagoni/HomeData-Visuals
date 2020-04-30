@@ -27,17 +27,17 @@ Enviromental_layout=html.Div([
                         html.Div(className='row',children=[
                                 html.Div(className='four columns',children=[      
                                             dcc.Graph(id='light-graph',className='',
-                                                      figure=px.line(data,x='Time',y='Temperature',title='Temperature (ºC)',range_x=[0,100],range_y=[15,33],color_discrete_sequence=['rgb(248, 160, 126)',''],height=graph_height))
+                                                      figure=px.line(data,x='Time',y='Temperature',title='Temperature (ºC)',range_y=[15,33],color_discrete_sequence=['rgb(248, 160, 126)',''],height=graph_height))
                                                                                
                                         ]),
                                 html.Div(className='four columns',children=[      
                                             dcc.Graph(id='temperature-graph',
-                                                      figure=px.line(data,x='Time',y='Light',title='Light Levels (Lux)',range_x=[0,100],range_y=[0,600],color_discrete_sequence=['rgb(254, 252, 205)',''],height=graph_height))
+                                                      figure=px.line(data,x='Time',y='Light',title='Light Levels (Lux)',range_y=[0,600],color_discrete_sequence=['rgb(254, 252, 205)',''],height=graph_height))
                                                                                
                                         ]),                               
                                 html.Div(className='four columns',children=[      
                                             dcc.Graph(id='humidity-graph',
-                                                      figure=px.line(data,x='Time',y='Humidity',title='Humidity (%)',range_x=[0,100],range_y=[20,55],color_discrete_sequence=['rgb(133, 196, 201)',''],height=graph_height))
+                                                      figure=px.line(data,x='Time',y='Humidity',title='Humidity (%)',range_y=[20,55],color_discrete_sequence=['rgb(133, 196, 201)',''],height=graph_height))
                                                                                
                                         ]), 
                                ]),
