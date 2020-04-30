@@ -19,7 +19,7 @@ font-family: "Open Sans",  "Neue Haas Grotesk Display", "HelveticaNeue", "Helvet
   color: var(--maing-txt-color);
   font-size: 45px !important;
   width: 80%;
-  border-left: 10px solid #98151b;
+ /* border-left: 10px solid #98151b;*/
   background: var(--maing-bg-color);
   padding-left: 30px;
 }
@@ -47,8 +47,8 @@ small-title{
   color: var(--maing-txt-color);
   font-size: 30px !important;
  /* width: 80%;*/
-  border-left: 10px solid #98151b;
-  border-right: 10px solid #98151b;
+ /* border-left: 3px solid #98151b;
+  border-right: 10px solid #98151b;*/
   background: var(--maing-bg-color);
   /*padding-left: 30px;*/
   padding-top:10px; 
@@ -82,7 +82,7 @@ small-title{
    border-left: 10px solid #98151b;
 }
 .all-tabs {
-  width:90%;
+  width:95%;
   margin-left: auto;
   margin-right: auto;
   border-radius:5px;
@@ -107,9 +107,11 @@ small-title{
 .tab.first {
   border-left-style: none;
 }
-tab:hover{
-  filter: brightness(150%);
-  color: rgb(0,0,0,0.1)
+.tab:hover{
+  background-color:rgb(255, 255, 255, 0.7);
+  border-radius:5px;
+  /*filter: brightness(150%);*/
+  color: rgb(0,0,0);
 }
 
 /* Containers */
@@ -134,7 +136,7 @@ tab:hover{
 }
 
 .pretty-container {
-  border-radius: 5px;
+  border-radius: 15px;
   background-color:  var(--container-color);
   /*margin: 10px;*/
   padding: 0px 0px 15px 0px; 
@@ -148,7 +150,10 @@ tab:hover{
   filter: brightness(150%);
   transform: scale(1, 1.1) translateX(15px) ;
 /*  transform: translateX(20px) rotate(1080deg);*/
-  
+}
+.pretty-container:active{
+  transform: translateX(200px);
+ 
 }
 .graph-container {
   border-radius: 10px;

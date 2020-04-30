@@ -23,7 +23,7 @@ import plotly.graph_objs as go
 import plotly.express as px
 import plotly.io as pio
 import socket
-
+import random
 import sys
 sys.path.append('layouts/')
 
@@ -95,6 +95,10 @@ app.layout=html.Div(children= [
                 ]),
         html.Div(
             [
+                dcc.Interval(id='intervals-layouts',
+    #                                             interval=0.1*1000, # in milliseconds USEFULL FOR REAL
+                    interval=1*1000,
+                    n_intervals=0),
                 dcc.Link(
                     "Project Overview",
                     href="/dash-kitchen-report/overview",
@@ -301,7 +305,8 @@ def display_table(value):
   
 @app.callback(
         Output('central-page','children'),
-        [Input('url','pathname')])
+        [Input('url','pathname')]
+        )
 def display_page(pathname):
     if pathname=="/dash-kitchen-report/overview":
         return(Project_Overview_layout
@@ -321,7 +326,9 @@ def display_page(pathname):
     else:
         return(Development_layout             
                )                        
-                        
+
+
+                   
 #Main
 if __name__ == "__main__":
     app.run_server(debug=True,port=8888)

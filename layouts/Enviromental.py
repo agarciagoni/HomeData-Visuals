@@ -26,18 +26,18 @@ Enviromental_layout=html.Div([
                                 children=['Room Environment']),
                         html.Div(className='row',children=[
                                 html.Div(className='four columns',children=[      
-                                            dcc.Graph(id='light-graph',
-                                                      figure=px.line(data,x='Time',y='Light',title='Light Level',range_y=[0,550],color_discrete_sequence=['rgb(209, 238, 234)',''],height=graph_height))
+                                            dcc.Graph(id='light-graph',className='',
+                                                      figure=px.line(data,x='Time',y='Temperature',title='Temperature (ºC)',range_x=[0,100],range_y=[15,33],color_discrete_sequence=['rgb(248, 160, 126)',''],height=graph_height))
                                                                                
                                         ]),
                                 html.Div(className='four columns',children=[      
                                             dcc.Graph(id='temperature-graph',
-                                                      figure=px.line(data,x='Time',y='Temperature',title='Temperature',range_y=[0,33],color_discrete_sequence=['rgb(168, 219, 217)',''],height=graph_height))
+                                                      figure=px.line(data,x='Time',y='Light',title='Light Levels (Lux)',range_x=[0,100],range_y=[0,600],color_discrete_sequence=['rgb(254, 252, 205)',''],height=graph_height))
                                                                                
                                         ]),                               
                                 html.Div(className='four columns',children=[      
                                             dcc.Graph(id='humidity-graph',
-                                                      figure=px.line(data,x='Time',y='Humidity',title='Humidity',range_y=[0,50],color_discrete_sequence=['rgb(133, 196, 201)',''],height=graph_height))
+                                                      figure=px.line(data,x='Time',y='Humidity',title='Humidity (%)',range_x=[0,100],range_y=[20,55],color_discrete_sequence=['rgb(133, 196, 201)',''],height=graph_height))
                                                                                
                                         ]), 
                                ]),
@@ -45,11 +45,11 @@ Enviromental_layout=html.Div([
                         html.Div(className='row eleven columns',children=[
                             html.Div(className='six columns',children=[
                                             dcc.Graph(id='humidity-graph',
-                                                      figure=px.line(data,x='Time',y='Humidity',title='Sound Right',range_y=[20,60],color_discrete_sequence=['rgb(76, 200, 163)',''],height=graph_height))
+                                                      figure=px.line(data,x='Time',y='Sound 1',title='Sound Right',range_y=[0,30],color_discrete_sequence=['rgb(76, 200, 163)',''],height=graph_height))
                                 ]),
                                                                         html.Div(className='six columns',children=[
                                             dcc.Graph(id='humidity-graph',
-                                                      figure=px.line(data,x='Time',y='Temperature',title='Sound Left',range_y=[20,40],color_discrete_sequence=['rgb(56, 178, 163)',''],height=graph_height))
+                                                      figure=px.line(data,x='Time',y='Sound 2',title='Sound Left',range_y=[0,30],color_discrete_sequence=['rgb(56, 178, 163)',''],height=graph_height))
                                 ]),
                         ]),
 ])
