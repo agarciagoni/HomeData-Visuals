@@ -103,11 +103,11 @@ app.layout=html.Div(children= [
                     n_intervals=0),
                 dcc.Link(
                     "Project Overview",
-                    href="/dash-kitchen-report/overview",
+                    href="/kitchen-report/overview",
                     className="tab first",
                 ),
                 dcc.Link(
-                    "Enviroment", href="/dash-kitchen-report/Enviroment",
+                    "Enviroment", href="/kitchen-report/EnviromentData",
                     className="tab"
                 ),
 #                dcc.Link(
@@ -117,13 +117,13 @@ app.layout=html.Div(children= [
 #                ),
                 dcc.Link(
                     "Historical Data Visualisation",
-                    href="/dash-kitchen-report/sensors",
+                    href="/kitchen-report/HistoricData",
                     className="tab",
                 ),
 
                 dcc.Link(
                     "Storage Status",
-                    href="/dash-kitchen-report/storage",
+                    href="/kitchen-report/StorageData",
                     className="tab",
                 ),
 #                dcc.Link(
@@ -310,23 +310,20 @@ def display_table(value):
         [Input('url','pathname')]
         )
 def display_page(pathname):
-    if pathname=="/dash-kitchen-report/overview":
+    if pathname=="/kitchen-report/overview":
         return(Project_Overview_layout
                )
     elif pathname=="/dash-kitchen-report/Enviroment":
         return(Enviromental_layout
                )
-    elif (pathname=="/dash-kitchen-report/terMITes"):
-        return(terMITes_layout
-               )
-    elif (pathname=="/dash-kitchen-report/sensors"):
+    elif (pathname=="/kitchen-report/HistoricData"):
         return (Sensors_layout               
                 )
-    elif (pathname=="/dash-kitchen-report/storage"):
+    elif (pathname=="/kitchen-report/StorageData"):
         return (Storage_layout               
                 )
     else:
-        return(Development_layout             
+        return(Sensors_layout             
                )                        
 
 
