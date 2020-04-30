@@ -175,7 +175,7 @@ def user_bar_graph(value_x,value_c):
          Input('pie-sensor-compare','value'),
          Input('third-slider','value')])
 def user_bar_graph(value_y,value_c,value_s):
-    figure=px.scatter_3d(data,x='Time',y=value_y ,z=value_c,color='Light',title='Enviromental Data',range_x=value_s,color_continuous_scale=px.colors.diverging.Tealrose)#,marginal='rug')
+    figure=px.scatter_3d(data,x='Time',y=value_y ,z=value_c,color='Light',title='Environmental Data',range_x=value_s,color_continuous_scale=px.colors.diverging.Tealrose)#,marginal='rug')
     figure.update_layout({'legend_orientation':'h'})
     return figure
 
