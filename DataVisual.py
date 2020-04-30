@@ -61,12 +61,12 @@ pio.templates.default = "plotly_dark"
 #                        'https://codepen.io/agarciag/pen/WNvZbOo.css'] #Particular CSS
 # --------------------------------------------------------------------------------------
 """ File read and data preparation """
-file_name='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/kitchen_status.csv'
-file_pos='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/user_position.csv'
+file_name='kitchen_status.csv'
+#file_pos='C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/user_position.csv'
 data=pd.read_csv(file_name)
 data_tras=data.set_index('Time').T
-user_pos=pd.read_csv(file_pos)
-liv_ter=pd.read_csv('C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/csv_serial.csv') 
+#user_pos=pd.read_csv(file_pos)
+liv_ter=pd.read_csv('csv_serial.csv') 
 variables=data.columns
 variables_time=data.set_index('Time').columns
 # --------------------------------------------------------------------------------------
