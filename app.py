@@ -29,7 +29,7 @@ sys.path.append('layouts/')
 
 from header_extra import Header
 from Project_Overview_layout import Project_Overview_layout
-from termites_visual import terMITes_layout
+#from termites_visual import terMITes_layout
 from Sensors_layout import Sensors_layout
 from Current_layout import Current_layout
 from Enviromental import Enviromental_layout
