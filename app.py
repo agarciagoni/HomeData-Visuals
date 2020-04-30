@@ -107,7 +107,7 @@ app.layout=html.Div(children= [
                     className="tab first",
                 ),
                 dcc.Link(
-                    "Enviroment", href="/kitchen-report/EnviromentData",
+                    "Environment", href="/kitchen-report/EnvironmentData",
                     className="tab"
                 ),
 #                dcc.Link(
@@ -313,7 +313,7 @@ def display_page(pathname):
     if pathname=="/kitchen-report/overview":
         return(Project_Overview_layout
                )
-    elif pathname=="/kitchen-report/EnviromentData":
+    elif pathname=="/kitchen-report/EnvironmentData":
         return(Enviromental_layout
                )
     elif (pathname=="/kitchen-report/HistoricData"):
