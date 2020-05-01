@@ -43,15 +43,16 @@ small-title{
 }
 .tab-title {
   position: relative;
-  text-align:center;
+  text-align: left;
   color: var(--maing-txt-color);
-  font-size: 30px !important;
+  font-size: 35px !important;
  /* width: 80%;*/
  /* border-left: 3px solid #98151b;
   border-right: 10px solid #98151b;*/
   background: var(--maing-bg-color);
-  /*padding-left: 30px;*/
+  padding-left: 30px;*/
   padding-top:10px; 
+  padding-bottom:10px;
 }
 
 .development-title {
