@@ -18,7 +18,6 @@ import plotly.io as pio
 import plotly.graph_objs as go
 
 file_name=('Data/kitchen_status.csv')
-file_name=('C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/kitchen_status.csv')
 pio.templates.default = "plotly_dark"
 colors=px.colors.diverging.Tealrose
 data=pd.read_csv(file_name)
