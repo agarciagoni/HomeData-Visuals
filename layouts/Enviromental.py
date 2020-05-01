@@ -15,29 +15,218 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 import plotly.io as pio
+import plotly.graph_objs as go
 
 file_name=('Data/kitchen_status.csv')
+file_name=('C:/Users/Alejandro/Desktop/MIT Media Lab/PiccoloKitchen/codes/Git/HomeData-Visuals/Data/kitchen_status.csv')
 pio.templates.default = "plotly_dark"
 colors=px.colors.diverging.Tealrose
 data=pd.read_csv(file_name)
 graph_height=520
+
+#Grpah definition
+colors ={
+        'background':'rgba(30,30,30,0.3)',
+        'text': 'white',
+        'title': 'white',
+        'right': 'rgba(128, 128, 128, 0.2)',
+        'kitchen_top': 'rgba(128, 128, 128, 0.5)',
+        'led':'rgba(128, 128, 128, 0.1)',
+        'temp':'rgb(248, 160, 126)',
+        'temp_fill':'rgba(248, 160, 126,0.1)',
+        'hum':'rgb(133, 196, 201)',
+        'hum_fill':'rgba(133, 196, 201,0.1)',
+        'lit':'rgb(254, 252, 205)',
+        'lit_fill':'rgba(254, 252, 205,0.1)',
+        'sound_right':'rgb(76, 200, 163)',
+        'sound_right_med':'rgba(76, 200, 163,0.2)',
+        'sound_right_low':'rgba(76, 200, 163,0.1)',     
+        'sound_left':' rgb(56, 178, 163)',
+        'sound_left_med':' rgba(56, 178, 163,0.2)',
+        'sound_left_low':' rgba(56, 178, 163,0.1)',
+        }
+
+temp={'data':[go.Scatter(                         
+              y= data.iloc[-100:,4].tolist(),
+              x=data.iloc[-100:,0].tolist(),
+              line={'color':colors['temp']},
+              fill='tozeroy',
+              fillcolor=colors['temp_fill'],
+             )],
+     'layout': {
+             'yaxis':{'fixedrange':False,
+                      'range':[20,33],
+                      'tickfont':{'size':14},
+                      'gridcolor':'black',
+                      'title':'(ºC)'},
+             'xaxis':{'nticks':7,
+                      'tickangle':15,
+                      'tickfont':{'size':14},
+                      'gridcolor':'black'},
+             'title': {'text':'Temperature (ºC)',
+                       'x':0.1,
+                       },
+             'plot_bgcolor':colors['background'],
+             'paper_bgcolor': colors['background'],
+             'font': {  'size':15,
+                        'color': colors['text']},
+             'height':600,
+                }
+}
+hum={'data':[go.Scatter(             
+                  y= data.iloc[-100:,5].tolist(),
+                  x=data.iloc[-100:,0].tolist(),
+                  line={'color':colors['hum']},
+                  fill='tozeroy',
+                  fillcolor=colors['hum_fill'],
+                  mode='lines'
+                 )],
+     'layout': {
+             'yaxis':{'fixedrange':False,
+                      'range':[38,50],
+                       'title':'(%)'},
+             'xaxis':{'nticks':7,
+                      'tickangle':15,
+                      'tickfont':{'size':14}},
+             'title': {'text':'Humidity (%)',
+                       'x':0.1,
+                       },
+             'plot_bgcolor':colors['background'],
+             'paper_bgcolor': colors['background'],
+             'font': {  'size':15,
+                        'color': colors['text']},
+             'height':600,
+                }
+}  
+lit={'data':[go.Scatter(             
+              y= data.iloc[-100:,6].tolist(),
+              x=data.iloc[-100:,0].tolist(),
+              line={'color':colors['lit']},
+              fill='tozeroy',
+              fillcolor=colors['lit_fill'],
+             )],
+     'layout': {
+             'yaxis':{'fixedrange':False,
+                      'range':[520,575],
+                       'title':'(Lux)'},
+             'xaxis':{'nticks':7,
+                      'tickangle':15,
+                      'tickfont':{'size':14}},
+             'title': {'text':'Light levels (Lux)',
+                       'x':0.1,
+                       },
+             'plot_bgcolor':colors['background'],
+             'paper_bgcolor': colors['background'],
+             'font': {  'size':15,
+                        'color': colors['text']},
+             'height':600,
+             }
+} 
+             
+##Sound graphs
+sound_right={
+    'data':[  go.Scatter(             
+              y= [10]*1000,
+              x=data.iloc[:,0].tolist(),
+              line={'color':colors['sound_right_low']},
+              fill='tozeroy',
+              fillcolor=colors['sound_right_low'],
+              mode='none',
+              name="Low Level"
+             ),
+             go.Scatter(             
+              y= [15]*1000,
+              x=data.iloc[:,0].tolist(),
+              line={'color':colors['sound_right_med']},
+              fill='tonextx',
+              fillcolor=colors['sound_right_med'],
+              mode='none',
+              name='Medium level'
+             ),
+             go.Scatter(             
+              y= data.iloc[:,2].tolist(),
+              x=data.iloc[:,0].tolist(),
+              line={'color':colors['sound_right']},
+           #   fill='tozeroy',
+          #    fillcolor=colors['lit_fill'],
+             name='Sound level'
+             )],
+     'layout': {
+          #  'yaxis':{'fixedrange':True,
+          #            'range':[520,575]},
+             'xaxis':{'nticks':15,
+                      'tickangle':30,
+                      'tickfont':{'size':14}},
+             'title': {'text':'Sound Level Right Side',
+                       'x':0.1,
+                       },
+             'plot_bgcolor':colors['background'],
+             'paper_bgcolor': colors['background'],
+             'font': {  'size':15,
+                        'color': colors['text']},
+             'height':500,
+             }
+}    
+sound_left={
+    'data':[  go.Scatter(             
+              y= [10]*1000,
+              x=data.iloc[:,0].tolist(),
+              line={'color':colors['sound_left_low']},
+              fill='tozeroy',
+              fillcolor=colors['sound_left_low'],
+              mode='none',
+              name="Low Level"
+             ),
+             go.Scatter(             
+              y= [15]*1000,
+              x=data.iloc[:,0].tolist(),
+              line={'color':colors['sound_left_med']},
+              fill='tonextx',
+              fillcolor=colors['sound_left_med'],
+              mode='none',
+              name='Medium level'
+             ),
+             go.Scatter(             
+              y= data.iloc[:,2].tolist(),
+              x=data.iloc[:,0].tolist(),
+              line={'color':colors['sound_left']},
+           #   fill='tozeroy',
+          #    fillcolor=colors['lit_fill'],
+             name='Sound level'
+             )],
+     'layout': {
+            'yaxis':{'gridcolor':'black'},
+             'xaxis':{'nticks':15,
+                      'tickangle':30,
+                      'tickfont':{'size':14},
+                      'gridcolor':'black'},
+             'title': {'text':'Sound Level Left Side',
+                       'x':0.1,
+                       },
+             'plot_bgcolor':colors['background'],
+             'paper_bgcolor': colors['background'],
+             'font': {  'size':15,
+                        'color': colors['text']},
+             'height':500,
+             }
+}  
+             
 Enviromental_layout=html.Div([
                         html.H5(className='tab-title',
                                 children=['Room Environment']),
                         html.Div(className='row',children=[
                                 html.Div(className='four columns',children=[      
-                                            dcc.Graph(id='light-graph',className='',
-                                                      figure=px.line(data,x='Time',y='Temperature',title='Temperature (ºC)',range_y=[15,33],color_discrete_sequence=['rgb(248, 160, 126)',''],height=graph_height))
-                                                                               
+                                            dcc.Graph(id='temperature-graph',className='',
+                                                      figure=temp)
                                         ]),
                                 html.Div(className='four columns',children=[      
-                                            dcc.Graph(id='temperature-graph',
-                                                      figure=px.line(data,x='Time',y='Light',title='Light Levels (Lux)',range_y=[0,600],color_discrete_sequence=['rgb(254, 252, 205)',''],height=graph_height))
-                                                                               
+                                            dcc.Graph(id='light-graph',
+                                                      figure=lit)               
                                         ]),                               
                                 html.Div(className='four columns',children=[      
                                             dcc.Graph(id='humidity-graph',
-                                                      figure=px.line(data,x='Time',y='Humidity',title='Humidity (%)',range_y=[20,55],color_discrete_sequence=['rgb(133, 196, 201)',''],height=graph_height))
+                                                figure=hum)
+#      figure=px.line(data,x='Time',y='Humidity',title='Humidity (%)',range_x=[0,100],range_y=[40,45],color_discrete_sequence=['rgb(133, 196, 201)',''],height=graph_height))
                                                                                
                                         ]), 
                                ]),
@@ -45,11 +234,12 @@ Enviromental_layout=html.Div([
                         html.Div(className='row eleven columns',children=[
                             html.Div(className='six columns',children=[
                                             dcc.Graph(id='humidity-graph',
-                                                      figure=px.line(data,x='Time',y='Sound 1',title='Sound Right',range_y=[0,30],color_discrete_sequence=['rgb(76, 200, 163)',''],height=graph_height))
+                                                      figure=sound_right)
                                 ]),
-                                                                        html.Div(className='six columns',children=[
+                             html.Div(className='six columns',children=[
                                             dcc.Graph(id='humidity-graph',
-                                                      figure=px.line(data,x='Time',y='Sound 2',title='Sound Left',range_y=[0,30],color_discrete_sequence=['rgb(56, 178, 163)',''],height=graph_height))
+                                                      figure=sound_left)
+#                                                      figure=px.line(data,x='Time',y='Sound 2',title='Sound Level Left Side',range_y=[0,30],color_discrete_sequence=['rgb(56, 178, 163)',''],height=graph_height))
                                 ]),
                         ]),
 ])
