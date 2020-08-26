@@ -97,18 +97,20 @@ app.layout=html.Div(children= [
                 ]),
         html.Div(
             [
-                dcc.Interval(id='intervals-layouts',
-    #                                             interval=0.1*1000, # in milliseconds USEFULL FOR REAL
-                    interval=1*1000,
-                    n_intervals=0),
-                dcc.Link(
-                    "Project Overview",
-                    href="/kitchen-report/overview",
-                    className="tab first",
-                ),
+# =============================================================================
+#                 dcc.Interval(id='intervals-layouts',
+#     #                                             interval=0.1*1000, # in milliseconds USEFULL FOR REAL
+#                     interval=1*1000,
+#                     n_intervals=0),
+#                 dcc.Link(
+#                     "Project Overview",
+#                     href="/kitchen-report/overview",
+#                     className="tab first",
+#                 ),
+# =============================================================================
                 dcc.Link(
                     "Environment", href="/kitchen-report/EnvironmentData",
-                    className="tab"
+                    className="tab first"
                 ),
 #                dcc.Link(
 #                    "TerMITes",
@@ -287,7 +289,7 @@ variables_table=['Position','Position Back','Position Front R','Position Front L
         Output('hist-table','children'),
         [Input('table-slider','value')])
 def display_table(value):
-    data_table=data_tras.iloc[:,value:value+15]
+    data_table=data_tras.iloc[:,value:value+10]
     data_table.insert(0,'Variables \ Time',variables_time,True)
     return generate_table_user(data_table,variables_table)
             
@@ -310,10 +312,12 @@ def display_table(value):
         [Input('url','pathname')]
         )
 def display_page(pathname):
-    if pathname=="/kitchen-report/overview":
-        return(Project_Overview_layout
-               )
-    elif pathname=="/kitchen-report/EnvironmentData":
+# =============================================================================
+#     if pathname=="/kitchen-report/overview":
+#         return(Project_Overview_layout
+#                )
+# =============================================================================
+    if pathname=="/kitchen-report/EnvironmentData":
         return(Enviromental_layout
                )
     elif (pathname=="/kitchen-report/HistoricData"):
